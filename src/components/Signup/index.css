@@ -1,0 +1,37 @@
+.signupView {
+  width: 25vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+}
+
+@media (min-width: 1200px) {
+  .signupView {
+    width: 40vw; /* 40% of the viewport width */
+    height: 40vh; /* 40% of the viewport height */
+    background-color: #2ecc71; /* Green background */
+    font-size: 3vw; /* Smaller font size */
+  }
+}
+
+/* Media query for screens between 600px and 1199px wide */
+@media (min-width: 600px) and (max-width: 1199px) {
+  .signupView {
+    width: 60vw; /* 60% of the viewport width */
+    height: 60vh; /* 60% of the viewport height */
+    background-color: #e74c3c; /* Red background */
+    font-size: 5vw; /* Larger font size */
+  }
+}
+
+/* Media query for screens narrower than 600px */
+@media (max-width: 599px) {
+  .signupView {
+    width: 80vw;
+    height: auto;
+    padding: 1rem;
+  }
+}
