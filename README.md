@@ -1,1 +1,3 @@
-# all-the-blogs-frontend
+# All the Blogs Front-end
+
+![https://react.dev/](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)![https://mui.com/](https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)![https://www.typescriptlang.org/](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)![https://redux-toolkit.js.org/](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)![https://eslint.org/](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)![https://github.com/features/actions](https://img.shields.io/badge/Github%20Actions-282a2e?style=for-the-badge&logo=githubactions&logoColor=367cfe)
