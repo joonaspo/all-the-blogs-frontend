@@ -1,7 +1,7 @@
-import { Typography } from '@mui/material'
+import { Typography } from '@mui/material';
 
 const HomeView = () => {
-  return <Typography>Welcome</Typography>
-}
+  return <Typography>Welcome</Typography>;
+};
 
-export default HomeView
+export default HomeView;

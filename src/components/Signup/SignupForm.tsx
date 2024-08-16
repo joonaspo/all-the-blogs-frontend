@@ -4,55 +4,55 @@ import {
   FormLabel,
   TextField,
   Typography,
-} from '@mui/material'
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import { Link } from 'react-router-dom'
-import { SyntheticEvent, useEffect, useState } from 'react'
-import dayjs, { Dayjs } from 'dayjs'
-import { ToNewUserEntry } from '../../types'
+} from '@mui/material';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Link } from 'react-router-dom';
+import { SyntheticEvent, useEffect, useState } from 'react';
+import dayjs, { Dayjs } from 'dayjs';
+import { ToNewUserEntry } from '../../types';
 
 interface Props {
-  onSubmit: (values: ToNewUserEntry) => void
+  onSubmit: (values: ToNewUserEntry) => void;
 }
 
 const SignupForm = ({ onSubmit }: Props) => {
   const styling = {
     marginBottom: '1rem',
     borderRadius: '0.4rem',
-  }
+  };
 
-  const [username, setUsername] = useState('')
-  const [displayName, setDisplayName] = useState('')
-  const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
-  const [bdate, setBdate] = useState<Dayjs | null>(dayjs())
-  const [dateOfBirth, setDateOfBirth] = useState('')
-  const [passwordError, setPasswordError] = useState(false)
+  const [username, setUsername] = useState('');
+  const [displayName, setDisplayName] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [bdate, setBdate] = useState<Dayjs | null>(dayjs());
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
 
   const formatDate = (dateValue: Dayjs | null) => {
-    setBdate(dateValue)
+    setBdate(dateValue);
     if (dateValue) {
-      setDateOfBirth(dateValue.format('YYYY-MM-DD'))
+      setDateOfBirth(dateValue.format('YYYY-MM-DD'));
     } else {
-      setDateOfBirth('')
+      setDateOfBirth('');
     }
-  }
+  };
 
   const handleSubmit = async (event: SyntheticEvent) => {
-    event.preventDefault()
-    const newUser = { username, displayName, password, dateOfBirth }
-    onSubmit(newUser)
-  }
+    event.preventDefault();
+    const newUser = { username, displayName, password, dateOfBirth };
+    onSubmit(newUser);
+  };
 
   useEffect(() => {
     if (password !== passwordConfirm) {
-      setPasswordError(true)
+      setPasswordError(true);
     } else {
-      setPasswordError(false)
+      setPasswordError(false);
     }
-  }, [password, passwordConfirm])
+  }, [password, passwordConfirm]);
 
   return (
     <FormControl fullWidth>
@@ -127,7 +127,7 @@ const SignupForm = ({ onSubmit }: Props) => {
         </Typography>
       </Link>
     </FormControl>
-  )
-}
+  );
+};
 
-export default SignupForm
+export default SignupForm;

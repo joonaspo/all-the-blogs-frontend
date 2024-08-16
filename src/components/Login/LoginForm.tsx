@@ -1,25 +1,25 @@
-import { Button, FormControl, TextField, Typography } from '@mui/material'
-import { SyntheticEvent, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { LoginCredentials } from '../../types'
+import { Button, FormControl, TextField, Typography } from '@mui/material';
+import { SyntheticEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { LoginCredentials } from '../../types';
 
 interface Props {
-  onSubmit: (values: LoginCredentials) => void
+  onSubmit: (values: LoginCredentials) => void;
 }
 
 const LoginForm = ({ onSubmit }: Props) => {
   const styling = {
     marginBottom: '1rem',
     borderRadius: '0.4rem',
-  }
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  };
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault()
-    const loginCredentials: LoginCredentials = { username, password }
-    onSubmit(loginCredentials)
-  }
+    e.preventDefault();
+    const loginCredentials: LoginCredentials = { username, password };
+    onSubmit(loginCredentials);
+  };
 
   return (
     <>
@@ -67,7 +67,7 @@ const LoginForm = ({ onSubmit }: Props) => {
         </Link>
       </FormControl>
     </>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

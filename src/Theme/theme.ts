@@ -1,9 +1,10 @@
-import { createTheme } from '@mui/material'
+import { Fab, createTheme, styled } from '@mui/material';
 
 export const theme = createTheme({
   palette: {
     primary: {
       main: '#34495E',
+      light: '#edf7fc',
     },
     secondary: {
       main: '#3D546B',
@@ -31,4 +32,15 @@ export const theme = createTheme({
       paddingTop: '0.5rem',
     },
   },
-})
+});
+
+export const StyledFab = styled(Fab)({
+  position: 'absolute',
+  zIndex: 1,
+  top: '-1.75rem',
+  display: 'flex',
+  left: 0,
+  right: 0,
+  margin: '0 auto',
+  border: '1px solid',
+});

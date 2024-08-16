@@ -18,10 +18,8 @@
 
 .notificationContainer {
   display: flex;
-  justify-content: flex-start;
-  position: absolute; /* or position: fixed; */
+  justify-content: center;
+  position: fixed; 
   top: 4dvh;
-  left: 50%;
-  transform: translateX(-50%);
   width: 80dvw;
 }
