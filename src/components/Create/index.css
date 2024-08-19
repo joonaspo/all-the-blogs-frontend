@@ -1,0 +1,9 @@
+.newPostView {
+  width: 80vw;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+}

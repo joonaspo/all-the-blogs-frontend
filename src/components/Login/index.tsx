@@ -24,7 +24,7 @@ const LoginView = () => {
   };
 
   return (
-    <div className="loginView">
+    <div className='loginView'>
       <LoginForm onSubmit={onSubmit} />
     </div>
   );

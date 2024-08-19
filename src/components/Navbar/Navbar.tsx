@@ -5,7 +5,7 @@ import { StyledFab } from '../../Theme/theme';
 import { logUserOut } from '../../Redux/reducers/loginReducer';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../Redux/store';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -19,9 +19,11 @@ const Navbar = () => {
     <AppBar position='fixed' color='primary' sx={{ top: 'auto', bottom: 0 }}>
       <Toolbar>
         <AccountCircle fontSize='large' sx={{ color: '#edf7fc' }} />
-        <StyledFab sx={{ backgroundColor: '#edf7fc' }}>
-          <Add color='inherit' />
-        </StyledFab>
+        <Link to='/create'>
+          <StyledFab sx={{ backgroundColor: '#edf7fc' }}>
+            <Add color='inherit' />
+          </StyledFab>
+        </Link>
         <Box sx={{ flexGrow: 1 }}></Box>
         <IconButton onClick={handleLogout}>
           <LogoutIcon fontSize='large' sx={{ color: '#edf7fc' }} />
