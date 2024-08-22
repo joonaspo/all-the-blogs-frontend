@@ -19,7 +19,7 @@
 .notificationContainer {
   display: flex;
   justify-content: center;
-  position: fixed; 
+  position: fixed;
   top: 4dvh;
   width: 80dvw;
 }

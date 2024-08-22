@@ -1,5 +1,6 @@
 import axios from 'axios';
-const baseUrl = '/api/blogs/';
+import { BlogPost } from '../types';
+const baseUrl = '/api/posts/';
 
 let token: string | null = null;
 
@@ -9,6 +10,16 @@ const config = {
 
 export const setToken = async (newToken: string | null) => {
   token = newToken;
+};
+
+export const getAllBlogs = async () => {
+  const { data } = await axios.get<BlogPost[]>(`${baseUrl}/all`);
+  return data;
+};
+
+export const getBlogById = async (id: string) => {
+  const { data } = await axios.get<BlogPost>(`${baseUrl}/${id}`);
+  return data;
 };
 
 export const createNewPost = async (newPostObject: unknown) => {

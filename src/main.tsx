@@ -5,14 +5,16 @@ import { ThemeProvider } from '@mui/material';
 import { theme } from './Theme/theme.ts';
 import { Provider } from 'react-redux';
 import { store } from './Redux/store.ts';
+import { BrowserRouter } from 'react-router-dom';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </ThemeProvider>
-  </StrictMode>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ThemeProvider>
+    </BrowserRouter>
+  </StrictMode>,
 );
-

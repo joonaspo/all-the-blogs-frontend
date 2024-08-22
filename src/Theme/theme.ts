@@ -44,3 +44,8 @@ export const StyledFab = styled(Fab)({
   margin: '0 auto',
   border: '1px solid',
 });
+
+export const InputFieldStyling = {
+  marginBottom: '1rem',
+  borderRadius: '0.4rem',
+};

@@ -7,7 +7,7 @@ import { clearNotification } from '../../Redux/reducers/notificationReducer';
 
 const NotificationPopup = () => {
   const { message, severity } = useSelector(
-    (state: RootState) => state.notification
+    (state: RootState) => state.notification,
   );
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
@@ -16,7 +16,7 @@ const NotificationPopup = () => {
   if (message === null) return null;
 
   return (
-    <div className="notificationContainer">
+    <div className='notificationContainer'>
       <Alert severity={severity}>{message}</Alert>
     </div>
   );

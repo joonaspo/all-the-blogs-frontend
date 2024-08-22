@@ -7,7 +7,6 @@ import axios from 'axios';
 import { showTimedError } from '../../Redux/reducers/notificationReducer';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../Redux/store';
-import Navbar from '../Navbar/Navbar';
 
 const SignupView = () => {
   const navigate = useNavigate();
@@ -35,7 +34,6 @@ const SignupView = () => {
   return (
     <div className='signupView'>
       <SignupForm onSubmit={onSubmit} />
-      <Navbar />
     </div>
   );
 };

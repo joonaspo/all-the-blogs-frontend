@@ -2,6 +2,8 @@ import { Button, FormControl, TextField, Typography } from '@mui/material';
 import { SyntheticEvent, useState } from 'react';
 import { BlogEntryFromValues } from '../../types';
 import TagsList from './TagsList';
+import { InputFieldStyling } from '../../Theme/theme';
+import NewTagForm from './NewTagForm';
 
 const NewPostForm = () => {
   const [title, setTitle] = useState('');
@@ -27,9 +29,9 @@ const NewPostForm = () => {
     };
     console.log(newEntry);
   };
-  const styling = {
-    marginBottom: '1rem',
-    borderRadius: '0.4rem',
+
+  const dropTag = (value: string) => {
+    setTagsArray(tagsArray.filter((e) => e !== value));
   };
   return (
     <FormControl fullWidth>
@@ -47,7 +49,7 @@ const NewPostForm = () => {
         type='text'
         label='Title'
         fullWidth
-        sx={styling}
+        sx={InputFieldStyling}
         value={title}
         onChange={({ target }) => setTitle(target.value)}
       />
@@ -56,7 +58,7 @@ const NewPostForm = () => {
         type='text'
         label='Author'
         fullWidth
-        sx={styling}
+        sx={InputFieldStyling}
         value={author}
         onChange={({ target }) => setAuthor(target.value)}
       />
@@ -65,7 +67,7 @@ const NewPostForm = () => {
         type='text'
         label='Description'
         fullWidth
-        sx={styling}
+        sx={InputFieldStyling}
         value={description}
         onChange={({ target }) => setDescription(target.value)}
       />
@@ -74,23 +76,12 @@ const NewPostForm = () => {
         type='text'
         label='URL'
         fullWidth
-        sx={styling}
+        sx={InputFieldStyling}
         value={url}
         onChange={({ target }) => setUrl(target.value)}
       />
-      <>
-        <TextField
-          variant='outlined'
-          type='text'
-          label='Tags'
-          fullWidth
-          sx={styling}
-          value={tag}
-          onChange={({ target }) => setTag(target.value)}
-        />
-        {tagsArray ? <TagsList tags={tagsArray} /> : <></>}
-        {tag.length < 3 ? <></> : <Button onClick={addTags}>Add tag</Button>}
-      </>
+      <NewTagForm addTags={addTags} tag={tag} setTag={setTag} />
+      {tagsArray ? <TagsList tags={tagsArray} dropTag={dropTag} /> : <></>}
       <Button
         variant='contained'
         size='large'
