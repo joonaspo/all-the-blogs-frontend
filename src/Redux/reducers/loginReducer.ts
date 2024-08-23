@@ -6,26 +6,21 @@ import { AppDispatch } from '../store';
 import axios from 'axios';
 import { showTimedError } from './notificationReducer';
 
-interface LoginState {
-  token: string | null;
-  displayName: string | null;
-  username: string | null;
-}
-
-const initialState: LoginState = {
-  token: null,
-  displayName: null,
-  username: null,
-};
+const initialState: UserLoggedIn | null = (() => {
+  const userJSON = localStorage.getItem('BlogAppUser') as string | null;
+  if (userJSON) {
+    const user: UserLoggedIn = JSON.parse(userJSON);
+    return user;
+  }
+  return null;
+})();
 
 export const loginReducer = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    setCurrentUser: (state, action) => {
-      state.token = action.payload.token;
-      state.displayName = action.payload.displayName;
-      state.username = action.payload.username;
+    setCurrentUser: (_state, action) => {
+      return action.payload;
     },
   },
 });
@@ -36,13 +31,8 @@ export const logUserIn = (loginCredentials: LoginCredentials) => {
       const user = await logIn(loginCredentials);
       localStorage.setItem('BlogAppUser', JSON.stringify(user));
       await setToken(user.token);
-      dispatch(
-        setCurrentUser({
-          token: user.token,
-          displayName: user.displayName,
-          user: user.username,
-        }),
-      );
+      console.log(user);
+      dispatch(setCurrentUser(user));
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(error.response?.data);
@@ -62,24 +52,7 @@ export const logUserOut = () => {
   return async (dispatch: AppDispatch) => {
     localStorage.removeItem('BlogAppUser');
     await setToken(null);
-    dispatch(
-      setCurrentUser({ token: null, displayName: null, username: null }),
-    );
-  };
-};
-
-export const checkForLogin = () => {
-  return async (dispatch: AppDispatch) => {
-    const userJSON = localStorage.getItem('BlogAppUser');
-    if (userJSON) {
-      const user: UserLoggedIn = JSON.parse(userJSON);
-      await setToken(user.token);
-      dispatch(setCurrentUser(user));
-    } else {
-      dispatch(
-        setCurrentUser({ token: null, displayName: null, username: null }),
-      );
-    }
+    dispatch(setCurrentUser(null));
   };
 };
 

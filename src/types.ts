@@ -23,7 +23,9 @@ export interface Comment {
 
 export type NonSensitiveUser = Omit<BaseUser, 'dateOfBirth'>;
 
-export interface ToNewUserEntry extends BaseUser {
+export type UserWithoutID = Omit<BaseUser, 'id'>;
+
+export interface ToNewUserEntry extends UserWithoutID {
   password: string;
 }
 

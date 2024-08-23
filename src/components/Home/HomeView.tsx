@@ -1,11 +1,10 @@
-import { Typography } from '@mui/material';
-
 import BlogsView from '../Blogs/BlogsView';
+import SearchBar from '../Navbar/SearchBar';
 
 const HomeView = () => {
   return (
     <>
-      <Typography>Welcome</Typography>
+      <SearchBar />
       <BlogsView />
     </>
   );

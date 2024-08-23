@@ -5,22 +5,24 @@ import SignupView from './components/Signup';
 import HomeView from './components/Home/HomeView';
 import NotificationPopup from './components/Notifications/NotificationPopup';
 import CreateNewPostView from './components/Create/CreateNewPostView';
-import { AppDispatch } from './Redux/store';
-import { useEffect } from 'react';
-import { checkForLogin } from './Redux/reducers/loginReducer';
-import { useDispatch } from 'react-redux';
 import Navbar from './components/Navbar/Navbar';
 import ViewDetailedBlog from './components/Blogs/ViewDetailedBlog';
+import { useEffect } from 'react';
+
+import { useSelector } from 'react-redux';
+import { RootState } from './Redux/store';
+import { setToken } from './services/blogPostsService';
 
 const App = () => {
-  const dispatch: AppDispatch = useDispatch();
-
+  const token = useSelector((state: RootState) => state.login?.token) as
+    | string
+    | null;
   useEffect(() => {
-    const checkForExistingUser = async () => {
-      await dispatch(checkForLogin());
+    const saveToken = async () => {
+      await setToken(token);
     };
-    checkForExistingUser();
-  }, [dispatch]);
+    saveToken();
+  }, [token]);
 
   return (
     <div className='page'>

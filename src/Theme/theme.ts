@@ -32,6 +32,16 @@ export const theme = createTheme({
       paddingTop: '0.5rem',
     },
   },
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          borderRadius: '0.4rem',
+          backgroundColor: '#edf7fc',
+        },
+      },
+    },
+  },
 });
 
 export const StyledFab = styled(Fab)({

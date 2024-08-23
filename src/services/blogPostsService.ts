@@ -1,15 +1,17 @@
 import axios from 'axios';
-import { BlogPost } from '../types';
+import { BlogEntryFormValues, BlogPost } from '../types';
 const baseUrl = '/api/posts/';
 
-let token: string | null = null;
+const token: string | null = null;
 
-const config = {
+let config = {
   headers: { Authorization: `Bearer ${token}` },
 };
 
 export const setToken = async (newToken: string | null) => {
-  token = newToken;
+  config = {
+    headers: { Authorization: `Bearer ${newToken}` },
+  };
 };
 
 export const getAllBlogs = async () => {
@@ -22,7 +24,8 @@ export const getBlogById = async (id: string) => {
   return data;
 };
 
-export const createNewPost = async (newPostObject: unknown) => {
-  const { data } = await axios.post(baseUrl, newPostObject, config);
+export const createNewPost = async (newPostObject: BlogEntryFormValues) => {
+  console.log(config);
+  const { data } = await axios.post<BlogPost>(baseUrl, newPostObject, config);
   return data;
 };

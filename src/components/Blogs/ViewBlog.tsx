@@ -15,7 +15,7 @@ interface Props {
 
 const ViewBlog = ({ blog }: Props) => {
   return (
-    <Card variant='outlined' sx={{ width: '80vw' }}>
+    <Card sx={{ width: '90vw', margin: '1rem 0' }}>
       <CardContent>
         <Typography variant='h2' color='primary'>
           {blog.title}

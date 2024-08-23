@@ -19,11 +19,17 @@ const Navbar = () => {
   };
   return (
     <>
-      {user.token ? (
+      {user ? (
         <AppBar
           position='fixed'
           color='primary'
-          sx={{ top: 'auto', bottom: 0 }}>
+          sx={{
+            top: 'auto',
+            bottom: 0,
+            height: '8dvh',
+            display: 'flex',
+            justifyContent: 'center',
+          }}>
           <Toolbar>
             <AccountCircle fontSize='large' sx={{ color: '#edf7fc' }} />
             <Link to='/create'>

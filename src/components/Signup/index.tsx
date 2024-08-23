@@ -4,7 +4,10 @@ import { createNewUser } from '../../services/signupService';
 import { ToNewUserEntry } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { showTimedError } from '../../Redux/reducers/notificationReducer';
+import {
+  showTimedError,
+  showTimedSuccess,
+} from '../../Redux/reducers/notificationReducer';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../Redux/store';
 
@@ -14,10 +17,11 @@ const SignupView = () => {
 
   const onSubmit = async (newUser: ToNewUserEntry) => {
     try {
-      await createNewUser(newUser);
-      setTimeout(() => {
+      const result = await createNewUser(newUser);
+      if (result) {
+        dispatch(showTimedSuccess('User created succesfully!', 5000));
         navigate('/');
-      }, 4000);
+      }
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         if (error.response?.data && typeof error.response.data === 'string') {

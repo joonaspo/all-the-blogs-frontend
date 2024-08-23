@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 
 const LoginView = () => {
   const navigate = useNavigate();
-  const userLoggedIn = useSelector((state: RootState) => state.login.token);
+  const userLoggedIn = useSelector((state: RootState) => state.login?.token);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {

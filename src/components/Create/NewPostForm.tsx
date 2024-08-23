@@ -1,9 +1,14 @@
 import { Button, FormControl, TextField, Typography } from '@mui/material';
 import { SyntheticEvent, useState } from 'react';
-import { BlogEntryFromValues } from '../../types';
+import { BlogEntryFormValues } from '../../types';
 import TagsList from './TagsList';
 import { InputFieldStyling } from '../../Theme/theme';
 import NewTagForm from './NewTagForm';
+import { AppDispatch } from '../../Redux/store';
+import { useDispatch } from 'react-redux';
+import { createBlog } from '../../Redux/reducers/blogsReducer';
+import { useNavigate } from 'react-router-dom';
+import { showTimedError } from '../../Redux/reducers/notificationReducer';
 
 const NewPostForm = () => {
   const [title, setTitle] = useState('');
@@ -11,28 +16,40 @@ const NewPostForm = () => {
   const [description, setDescription] = useState('');
   const [url, setUrl] = useState('');
   const [tag, setTag] = useState('');
-  const [tagsArray, setTagsArray] = useState(['']);
+  const [tagsArray, setTagsArray] = useState<string[]>([]);
+
+  const navigate = useNavigate();
+
+  const dispatch: AppDispatch = useDispatch();
 
   const addTags = () => {
     setTagsArray(tagsArray.concat(tag));
     setTag('');
   };
 
-  const handleSubmit = (event: SyntheticEvent) => {
+  const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    const newEntry: BlogEntryFromValues = {
+    const newEntry: BlogEntryFormValues = {
       title,
       author,
       description,
       url,
       tags: tagsArray,
     };
-    console.log(newEntry);
+    try {
+      const result = await dispatch(createBlog(newEntry));
+      if (result) {
+        navigate('/home');
+      }
+    } catch (exception: unknown) {
+      dispatch(showTimedError(exception as string, 4000));
+    }
   };
 
   const dropTag = (value: string) => {
     setTagsArray(tagsArray.filter((e) => e !== value));
   };
+
   return (
     <FormControl fullWidth>
       <Typography variant='h4' color={'primary.main'}>
