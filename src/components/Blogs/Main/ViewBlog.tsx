@@ -5,7 +5,7 @@ import {
   CardContent,
   Typography,
 } from '@mui/material';
-import { BlogPost } from '../../types';
+import { BlogPost } from '../../../types';
 import { FormatQuote, Recommend } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 

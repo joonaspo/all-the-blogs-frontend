@@ -1,4 +1,4 @@
-import BlogsView from '../Blogs/BlogsView';
+import BlogsView from '../Blogs/Main/BlogsView';
 import SearchBar from '../Navbar/SearchBar';
 
 const HomeView = () => {

@@ -14,11 +14,6 @@ export const setToken = async (newToken: string | null) => {
   };
 };
 
-export const getAllBlogs = async () => {
-  const { data } = await axios.get<BlogPost[]>(`${baseUrl}/all`);
-  return data;
-};
-
 export const getBlogById = async (id: string) => {
   const { data } = await axios.get<BlogPost>(`${baseUrl}/${id}`);
   return data;
@@ -27,5 +22,26 @@ export const getBlogById = async (id: string) => {
 export const createNewPost = async (newPostObject: BlogEntryFormValues) => {
   console.log(config);
   const { data } = await axios.post<BlogPost>(baseUrl, newPostObject, config);
+  return data;
+};
+
+export const getBlogs = async (tags: string[]) => {
+  const { data } = await axios.get<BlogPost[]>(baseUrl, {
+    params: { tag: tags },
+    paramsSerializer: {
+      indexes: null,
+    },
+  });
+  console.log(data);
+  return data;
+};
+
+export const addLike = async (id: string) => {
+  const { data } = await axios.patch<BlogPost>(
+    `${baseUrl}/${id}`,
+    null,
+    config,
+  );
+  console.log(data);
   return data;
 };

@@ -6,12 +6,11 @@ import HomeView from './components/Home/HomeView';
 import NotificationPopup from './components/Notifications/NotificationPopup';
 import CreateNewPostView from './components/Create/CreateNewPostView';
 import Navbar from './components/Navbar/Navbar';
-import ViewDetailedBlog from './components/Blogs/ViewDetailedBlog';
 import { useEffect } from 'react';
-
 import { useSelector } from 'react-redux';
 import { RootState } from './Redux/store';
-import { setToken } from './services/blogPostsService';
+import { setToken } from './requests/blogRequests';
+import FetchDetailedBlog from './components/Blogs/Main/FetchDetailedBlog';
 
 const App = () => {
   const token = useSelector((state: RootState) => state.login?.token) as
@@ -32,7 +31,7 @@ const App = () => {
         <Route path='/signup' element={<SignupView />}></Route>
         <Route path='/home' element={<HomeView />}></Route>
         <Route path='/create' element={<CreateNewPostView />}></Route>
-        <Route path='/home/view/:id' element={<ViewDetailedBlog />}></Route>
+        <Route path='/home/view/:id' element={<FetchDetailedBlog />}></Route>
       </Routes>
       <Navbar />
     </div>

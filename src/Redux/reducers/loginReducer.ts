@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { logIn } from '../../services/loginService';
+import { logIn } from '../../requests/loginRequests';
 import { LoginCredentials, UserLoggedIn } from '../../types';
-import { setToken } from '../../services/blogPostsService';
+import { setToken } from '../../requests/blogRequests';
 import { AppDispatch } from '../store';
 import axios from 'axios';
 import { showTimedError } from './notificationReducer';

@@ -1,4 +1,9 @@
-import { ArrowBack, FormatQuote, ThumbUp } from '@mui/icons-material';
+import {
+  ArrowBack,
+  FormatQuote,
+  Recommend,
+  ThumbUpAltOutlined,
+} from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -8,15 +13,44 @@ import {
   Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { BlogPost } from '../../types';
-import RenderTag from './Tag';
+import { BlogPost } from '../../../types';
+import RenderTag from '../Misc/Tag';
 import CommentsView from './CommentsView';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { addLike } from '../../../requests/blogRequests';
+import { AppDispatch, RootState } from '../../../Redux/store';
+import { useDispatch } from 'react-redux';
+import {
+  showTimedError,
+  showTimedSuccess,
+} from '../../../Redux/reducers/notificationReducer';
+import { handleAxiosError } from '../../utils/errorHandler';
+import { useSelector } from 'react-redux';
+import LikedUsers from '../Misc/LikedUsers';
 
 interface Props {
   blog: BlogPost;
 }
 
 const DetailedBlog = ({ blog }: Props) => {
+  const dispatch: AppDispatch = useDispatch();
+  const queryClient = useQueryClient();
+  const currentUser = useSelector((state: RootState) => state.login);
+
+  const newLikeMutation = useMutation({
+    mutationFn: addLike,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['detailedBlog'] });
+      dispatch(showTimedSuccess(`Liked ${blog.title}`, 5));
+    },
+    onError: (error) => {
+      const errorMessage = handleAxiosError(error);
+      dispatch(showTimedError(errorMessage, 5));
+    },
+  });
+
+  const checkUser = blog.likedUsers.find((user) => user.id === currentUser?.id);
+
   return (
     <Box>
       <Card sx={{ width: '90vw' }} variant='outlined'>
@@ -83,14 +117,35 @@ const DetailedBlog = ({ blog }: Props) => {
               display: 'flex',
               justifyContent: 'space-between',
             }}>
-            <Typography variant='h6' color='primary.main'>
-              {blog.likedUsers.length}
-            </Typography>
-            <Button variant='contained' sx={{ display: 'flex' }}>
-              <Typography sx={{ display: 'flex' }}>
-                <ThumbUp />
+            <LikedUsers likedUsers={blog.likedUsers} />
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'flex-end',
+              }}>
+              <Typography
+                variant='h6'
+                color='primary.main'
+                padding={'0 1rem'}
+                display={'flex'}>
+                {blog.likedUsers.length}
+                <Recommend />
               </Typography>
-            </Button>
+              {checkUser ? (
+                <Typography variant='h6' color='primary.main'>
+                  Liked!
+                </Typography>
+              ) : (
+                <Button
+                  variant='contained'
+                  sx={{ display: 'flex' }}
+                  onClick={() => newLikeMutation.mutate(blog.id)}>
+                  <Typography sx={{ display: 'flex' }}>
+                    <ThumbUpAltOutlined />
+                  </Typography>
+                </Button>
+              )}
+            </Box>
           </Box>
           <Box
             sx={{

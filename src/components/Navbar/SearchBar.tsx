@@ -1,18 +1,8 @@
 import { Search } from '@mui/icons-material';
 import { AppBar, TextField, Toolbar } from '@mui/material';
-import FilterByTags from './FilterByTags';
-import { useEffect } from 'react';
-import { AppDispatch } from '../../Redux/store';
-import { useDispatch } from 'react-redux';
-import { getTags } from '../../Redux/reducers/tagsReducer';
+import FilterMenu from '../Filter/FilterMenu';
 
 const SearchBar = () => {
-  const dispatch: AppDispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getTags());
-  }, [dispatch]);
-
   return (
     <AppBar
       sx={{
@@ -26,7 +16,7 @@ const SearchBar = () => {
           display: 'flex',
           justifyContent: 'space-between',
         }}>
-        <FilterByTags />
+        <FilterMenu />
         <TextField
           size='small'
           type='search'

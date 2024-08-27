@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AppDispatch } from '../store';
-import { createNewPost, getAllBlogs } from '../../services/blogPostsService';
+import { createNewPost } from '../../requests/blogRequests';
 import axios from 'axios';
 import { showTimedError, showTimedSuccess } from './notificationReducer';
 import { BlogEntryFormValues, BlogPost } from '../../types';
@@ -19,25 +19,6 @@ export const blogsReducer = createSlice({
     },
   },
 });
-
-export const getBlogs = () => {
-  return async (dispatch: AppDispatch) => {
-    try {
-      const blogs = await getAllBlogs();
-      dispatch(setBlogs(blogs));
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response?.data && typeof error.response.data === 'string') {
-          dispatch(showTimedError(error.response.data, 5000));
-        } else {
-          dispatch(showTimedError('Unrecognized axios error!', 5000));
-        }
-      } else {
-        dispatch(showTimedError('Unknown error when fetching blogs!', 5000));
-      }
-    }
-  };
-};
 
 export const createBlog = (blogEntry: BlogEntryFormValues) => {
   return async (dispatch: AppDispatch): Promise<BlogPost | null> => {

@@ -1,6 +1,6 @@
 import SignupForm from './SignupForm';
 import '../Signup/index.css';
-import { createNewUser } from '../../services/signupService';
+import { createNewUser } from '../../requests/signupRequest';
 import { ToNewUserEntry } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';

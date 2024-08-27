@@ -49,6 +49,7 @@ export type LoginCredentials = Omit<
 >;
 
 export interface UserLoggedIn {
+  id: string;
   token: string;
   username: string;
   displayName: string;

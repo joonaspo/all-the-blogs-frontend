@@ -18,15 +18,10 @@ export const notificationReducer = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    setErrorNotification: (state, action) => {
+    setNotification: (state, action) => {
       state.message = action.payload.message;
       state.timeShown = action.payload.timeShown;
-      state.severity = AlertSeverity.error;
-    },
-    setSuccessNotification: (state, action) => {
-      state.message = action.payload.message;
-      state.timeShown = action.payload.timeShown;
-      state.severity = AlertSeverity.success;
+      state.severity = action.payload.severity;
     },
     clearNotification: (state) => {
       state.message = null;
@@ -38,31 +33,39 @@ export const notificationReducer = createSlice({
 
 export const showTimedError = (message: string, time: number) => {
   return async (dispatch: AppDispatch) => {
-    dispatch(setErrorNotification({ message, time }));
+    dispatch(setNotification({ message, time, severity: AlertSeverity.error }));
     setTimeout(() => {
       dispatch(clearNotification());
-    }, time);
+    }, time * 1000);
   };
 };
 
 export const showStaticError = (message: string) => (dispatch: AppDispatch) => {
   console.log(message);
-  dispatch(setErrorNotification({ message, timeShown: undefined }));
+  dispatch(setNotification({ message, timeShown: undefined }));
 };
 
 export const showTimedSuccess = (message: string, time: number) => {
   return async (dispatch: AppDispatch) => {
-    dispatch(setSuccessNotification({ message, time }));
+    dispatch(
+      setNotification({ message, time, severity: AlertSeverity.success }),
+    );
     setTimeout(() => {
       dispatch(clearNotification());
-    }, time);
+    }, time * 1000);
   };
 };
 
-export const {
-  setErrorNotification,
-  clearNotification,
-  setSuccessNotification,
-} = notificationReducer.actions;
+export const showTimedInfo = (message: string, time: number) => {
+  return async (dispatch: AppDispatch) => {
+    dispatch(setNotification({ message, time, severity: AlertSeverity.info }));
+    setTimeout(() => {
+      dispatch(clearNotification());
+    }, time * 1000);
+  };
+};
+
+export const { setNotification, clearNotification } =
+  notificationReducer.actions;
 
 export default notificationReducer.reducer;
