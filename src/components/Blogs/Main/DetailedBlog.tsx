@@ -15,7 +15,7 @@ import {
 import { Link } from 'react-router-dom';
 import { BlogPost } from '../../../types';
 import RenderTag from '../Misc/Tag';
-import CommentsView from './CommentsView';
+import CommentsView from './Comments/CommentsView';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addLike } from '../../../requests/blogRequests';
 import { AppDispatch, RootState } from '../../../Redux/store';
@@ -48,12 +48,13 @@ const DetailedBlog = ({ blog }: Props) => {
       dispatch(showTimedError(errorMessage, 5));
     },
   });
-
   const checkUser = blog.likedUsers.find((user) => user.id === currentUser?.id);
 
   return (
     <Box>
-      <Card sx={{ width: '90vw' }} variant='outlined'>
+      <Card
+        sx={{ width: '90vw', height: '87dvh', marginBottom: '3.4rem' }}
+        variant='outlined'>
         <CardContent>
           <Box
             sx={{
@@ -84,10 +85,12 @@ const DetailedBlog = ({ blog }: Props) => {
               {blog.title}
             </Typography>
           </Box>
+          <Link to={`/users/viewProfile/${blog.user.id}`}>
+            <Typography variant='body1' color='secondary'>
+              {blog.user.displayName} {`@${blog.user.username}`}
+            </Typography>
+          </Link>
 
-          <Typography variant='body1' color='secondary'>
-            {blog.user.displayName} {`@${blog.user.username}`}
-          </Typography>
           <FormatQuote color='primary' />
           <Typography variant='body1' color='primary'>
             {blog.description}
@@ -157,9 +160,10 @@ const DetailedBlog = ({ blog }: Props) => {
               <RenderTag key={tag.id} tag={tag} />
             ))}
           </Box>
-          {blog.comments.length > 0 && (
-            <CommentsView comments={blog.comments} />
-          )}
+          <Typography variant='h6' color='primary.main'>
+            Comments ({blog.comments.length}):
+          </Typography>
+          {blog.comments.length > 0 && <CommentsView id={blog.id} />}
         </CardContent>
       </Card>
     </Box>

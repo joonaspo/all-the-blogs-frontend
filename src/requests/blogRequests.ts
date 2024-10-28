@@ -1,6 +1,10 @@
 import axios from 'axios';
-import { BlogEntryFormValues, BlogPost } from '../types';
+import { BlogEntryFormValues, BlogPost, CommentObject } from '../types';
 const baseUrl = '/api/posts/';
+
+const axiosInstance = axios.create({
+  baseURL: baseUrl,
+});
 
 const token: string | null = null;
 
@@ -15,18 +19,22 @@ export const setToken = async (newToken: string | null) => {
 };
 
 export const getBlogById = async (id: string) => {
-  const { data } = await axios.get<BlogPost>(`${baseUrl}/${id}`);
+  const { data } = await axiosInstance.get<BlogPost>(`${id}`);
   return data;
 };
 
 export const createNewPost = async (newPostObject: BlogEntryFormValues) => {
   console.log(config);
-  const { data } = await axios.post<BlogPost>(baseUrl, newPostObject, config);
+  const { data } = await axiosInstance.post<BlogPost>(
+    '',
+    newPostObject,
+    config,
+  );
   return data;
 };
 
 export const getBlogs = async (tags: string[]) => {
-  const { data } = await axios.get<BlogPost[]>(baseUrl, {
+  const { data } = await axiosInstance.get<BlogPost[]>('', {
     params: { tag: tags },
     paramsSerializer: {
       indexes: null,
@@ -36,12 +44,14 @@ export const getBlogs = async (tags: string[]) => {
   return data;
 };
 
+export const getComments = async (id: string) => {
+  const { data } = await axiosInstance.get<CommentObject[]>(`${id}/comments`);
+  console.log(data);
+  return data;
+};
+
 export const addLike = async (id: string) => {
-  const { data } = await axios.patch<BlogPost>(
-    `${baseUrl}/${id}`,
-    null,
-    config,
-  );
+  const { data } = await axiosInstance.patch<BlogPost>(`${id}`, null, config);
   console.log(data);
   return data;
 };

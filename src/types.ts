@@ -14,7 +14,7 @@ export interface BasePost {
   user: NonSensitiveUser;
 }
 
-export interface Comment {
+export interface CommentObject {
   id: string;
   content: string;
   user: NonSensitiveUser;
@@ -27,6 +27,14 @@ export type UserWithoutID = Omit<BaseUser, 'id'>;
 
 export interface ToNewUserEntry extends UserWithoutID {
   password: string;
+}
+
+export interface UserObject extends BaseUser {
+  dateOfRegistration: string;
+  madePosts: {
+    title: string;
+    id: string;
+  }[];
 }
 
 export interface User extends BaseUser {
@@ -53,6 +61,7 @@ export interface UserLoggedIn {
   token: string;
   username: string;
   displayName: string;
+  expiresIn: number;
 }
 
 export type BlogEntry = Omit<BasePost, 'id' | 'user'>;

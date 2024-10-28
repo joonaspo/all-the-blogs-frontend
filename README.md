@@ -4,7 +4,7 @@
 
 ## About this project
 
-This repository contains the front end for my blogging application project. I have tried to follow the best practices in using the selected technologies. Login status and user interface state (applied filters and notifications) are handled using Redux to avoid prop-drilling and to keep the React components as light as possible in terms of application logic.
+This repository contains the front end for my blogging application project. Login status and user interface state (applied filters and notifications) are handled using Redux to avoid prop-drilling and to keep the React components as light as possible in terms of application logic.
 
 Data fetching is managed by React Query because of how simple yet versatile it is. Perhaps a better choice for state management with React Query would have been either Zustand, Jotai or just plain Context. Maybe a bit overkill, but I chose Redux because I am very familiar with it.
 

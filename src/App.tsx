@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from './Redux/store';
 import { setToken } from './requests/blogRequests';
 import FetchDetailedBlog from './components/Blogs/Main/FetchDetailedBlog';
+import Profile from './components/Profile/Profile';
 
 const App = () => {
   const token = useSelector((state: RootState) => state.login?.token) as
@@ -32,6 +33,7 @@ const App = () => {
         <Route path='/home' element={<HomeView />}></Route>
         <Route path='/create' element={<CreateNewPostView />}></Route>
         <Route path='/home/view/:id' element={<FetchDetailedBlog />}></Route>
+        <Route path='/users/viewProfile/:id' element={<Profile />}></Route>
       </Routes>
       <Navbar />
     </div>
