@@ -12,6 +12,8 @@ All token-requiring user operations are authenticated using Json Web Token.
 
 I have also included Prettier and ESLint to maintain constant code formatting and quality across the project.
 
+For the backend, see [https://github.com/joonaspo/all-the-blogs](https://github.com/joonaspo/all-the-blogs).
+
 ---
 
 #### Creating new blogs
