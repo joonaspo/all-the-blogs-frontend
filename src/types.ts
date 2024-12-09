@@ -21,6 +21,8 @@ export interface CommentObject {
   date: string;
 }
 
+export type CommentEntry = Omit<CommentObject, 'user' | 'date'>;
+
 export type NonSensitiveUser = Omit<BaseUser, 'dateOfBirth'>;
 
 export type UserWithoutID = Omit<BaseUser, 'id'>;

@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { BlogEntryFormValues, BlogPost, CommentObject } from '../types';
+import {
+  BlogEntryFormValues,
+  BlogPost,
+  CommentEntry,
+  CommentObject,
+} from '../types';
 const baseUrl = '/api/posts/';
 
 const axiosInstance = axios.create({
@@ -52,6 +57,16 @@ export const getComments = async (id: string) => {
 
 export const addLike = async (id: string) => {
   const { data } = await axiosInstance.patch<BlogPost>(`${id}`, null, config);
+  console.log(data);
+  return data;
+};
+
+export const addComment = async (id: string, content: string) => {
+  const { data } = await axios.post<CommentEntry>(
+    `/api/comments/${id}/new`,
+    { content },
+    config,
+  );
   console.log(data);
   return data;
 };

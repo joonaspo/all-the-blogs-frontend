@@ -27,6 +27,7 @@ import {
 import { handleAxiosError } from '../../utils/errorHandler';
 import { useSelector } from 'react-redux';
 import LikedUsers from '../Misc/LikedUsers';
+import NewComment from './Comments/NewComment';
 
 interface Props {
   blog: BlogPost;
@@ -160,6 +161,7 @@ const DetailedBlog = ({ blog }: Props) => {
               <RenderTag key={tag.id} tag={tag} />
             ))}
           </Box>
+          <NewComment id={blog.id} />
           <Typography variant='h6' color='primary.main'>
             Comments ({blog.comments.length}):
           </Typography>
